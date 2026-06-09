@@ -4,6 +4,15 @@ applyTo: "**/*.cs,**/*.xaml,**/*.razor,**/*.razor.css"
 
 # Framework Guidelines (C#, .NET MAUI & Blazor Hybrid)
 
+## Reference Documentation
+
+Always consult the latest Microsoft Learn documentation for up-to-date APIs and patterns:
+- **C# 14**: https://learn.microsoft.com/en-us/dotnet/csharp/whats-new/csharp-14
+- **.NET MAUI**: https://learn.microsoft.com/en-us/dotnet/maui/what-is-maui
+- **Blazor Hybrid**: https://learn.microsoft.com/en-us/aspnet/core/blazor/hybrid/
+
+Do not rely on outdated patterns — always prefer the latest APIs shown in Microsoft Learn.
+
 ## C# & .NET 10
 
 - Always use **C# 14** features: extension members/properties/operators, null-conditional assignment (`?.` on left-hand side), `field`-backed properties, implicit `Span<T>` conversions, `nameof` with unbound generics, partial constructors, `params` collections, etc.
