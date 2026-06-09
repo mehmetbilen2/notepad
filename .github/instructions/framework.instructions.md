@@ -6,7 +6,7 @@ applyTo: "**/*.cs,**/*.xaml,**/*.razor,**/*.razor.css"
 
 ## C# & .NET 10
 
-- Always use **C# 13** features: primary constructors, collection expressions, `params` spans, `field` keyword, etc.
+- Always use **C# 14** features: extension members/properties/operators, null-conditional assignment (`?.` on left-hand side), `field`-backed properties, implicit `Span<T>` conversions, `nameof` with unbound generics, partial constructors, `params` collections, etc.
 - Use file-scoped namespaces (`namespace Foo;` not `namespace Foo { }`).
 - Use `required` properties for mandatory model fields instead of constructor parameters where appropriate.
 - Use `record` or `record struct` for immutable data (e.g. tab state snapshots).

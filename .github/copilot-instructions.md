@@ -8,7 +8,7 @@ It targets **macOS (Mac Catalyst)** and **Windows** only — no Android, iOS, or
 ## Tech Stack & Versions
 
 - **SDK**: .NET 10 (net10.0-maccatalyst, net10.0-windows10.0.19041.0)
-- **Language**: C# 13 — always use the latest language features
+- **Language**: C# 14 — always use the latest language features
 - **UI framework**: .NET MAUI Blazor Hybrid (`BlazorWebView` inside a MAUI shell)
 - **Dependency injection**: `MauiProgram.cs` using `MauiAppBuilder`
 
@@ -16,7 +16,7 @@ It targets **macOS (Mac Catalyst)** and **Windows** only — no Android, iOS, or
 
 ### C# & .NET
 
-- Always use **C# 13** features where applicable: primary constructors, collection expressions, `params` spans, etc.
+- Always use **C# 14** features where applicable: extension members/properties/operators, null-conditional assignment, `field`-backed properties, implicit `Span<T>` conversions, partial constructors, `params` collections, etc.
 - Prefer `file`-scoped namespaces.
 - Use `required` properties instead of constructor injection for simple models.
 - Use `record` or `record struct` for immutable data models.

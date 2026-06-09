@@ -16,7 +16,7 @@ A cross-platform text editor inspired by Notepad++ and Windows Notepad, built wi
 ## Tech Stack
 
 - **.NET 10** — latest SDK
-- **C# 13** — latest language features
+- **C# 14** — latest language features
 - **.NET MAUI** — native shell, windowing, and platform integration
 - **Blazor Hybrid** — UI rendered via `BlazorWebView` inside a MAUI app
 - **Target platforms**: macOS (Mac Catalyst) and Windows
