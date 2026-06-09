@@ -1,6 +1,17 @@
 # NoteThings
 
-A cross-platform note-taking application built with **.NET MAUI Blazor Hybrid**, targeting **macOS** and **Windows**.
+A cross-platform text editor inspired by Notepad++ and Windows Notepad, built with **.NET MAUI Blazor Hybrid**, targeting **macOS** and **Windows**.
+
+## Features
+
+- **Tabbed editing** — open multiple notes simultaneously, each in its own tab
+- **JSON & XML support**
+  - Syntax highlighting with colour-coded tokens for easy reading
+  - Auto-format / pretty-print JSON and XML content with one click
+- **File operations**
+  - Save tab content as a text file or other supported formats
+  - Prompted to save unsaved changes before closing a tab
+- **Clipboard** — full cut, copy, and paste support
 
 ## Tech Stack
 
