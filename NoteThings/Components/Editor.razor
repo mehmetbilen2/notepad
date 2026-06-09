@@ -1,0 +1,28 @@
+@implements IDisposable
+
+<textarea value="@content"
+          @oninput="OnInput"
+          spellcheck="false"
+          class="h-full w-full resize-none border-0 bg-[#1e1e1e] p-4 font-mono text-sm text-[#d4d4d4] outline-none focus:outline-none"
+          placeholder="Start typing..."></textarea>
+
+@code {
+    private string content = string.Empty;
+
+    [Parameter] public string InitialContent { get; set; } = string.Empty;
+
+    [Parameter] public EventCallback<string> ContentChanged { get; set; }
+
+    protected override void OnInitialized() => content = InitialContent;
+
+    private async Task OnInput(ChangeEventArgs e)
+    {
+        content = e.Value?.ToString() ?? string.Empty;
+        if (ContentChanged.HasDelegate)
+        {
+            await ContentChanged.InvokeAsync(content);
+        }
+    }
+
+    public void Dispose() { }
+}

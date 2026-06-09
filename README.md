@@ -2,6 +2,8 @@
 
 A cross-platform text editor inspired by Notepad++ and Windows Notepad, built with **.NET MAUI Blazor Hybrid**, targeting **macOS** and **Windows**.
 
+![NoteThings on macOS](docs/first_screenshot.png)
+
 ## Features
 
 - **Tabbed editing** — open multiple notes simultaneously, each in its own tab
@@ -20,7 +22,7 @@ A cross-platform text editor inspired by Notepad++ and Windows Notepad, built wi
 - **.NET MAUI** — native shell, windowing, and platform integration
 - **Blazor Hybrid** — UI rendered via `BlazorWebView` inside a MAUI app
 - **Tailwind CSS** — utility-first styling for a custom desktop look and feel
-- **Monaco Editor** — VS Code's editor engine for text editing, JSON/XML syntax highlighting and formatting
+- **Plain `<textarea>`** — current editor; a richer editor (CodeMirror 6 / Monaco) is planned but requires a real JS bundler (npm + esbuild). Tracked for a future iteration.
 - **Target platforms**: macOS (Mac Catalyst) and Windows
 
 ## Project Structure

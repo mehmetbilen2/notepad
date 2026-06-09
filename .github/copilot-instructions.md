@@ -11,7 +11,7 @@ It targets **macOS (Mac Catalyst)** and **Windows** only — no Android, iOS, or
 - **Language**: C# 14 — always use the latest language features
 - **UI framework**: .NET MAUI Blazor Hybrid (`BlazorWebView` inside a MAUI shell)
 - **Styling**: Tailwind CSS — no Bootstrap, no Blazor component libraries
-- **Editor**: Monaco Editor (via JS interop in `wwwroot`) — handles text editing, syntax highlighting, and formatting
+- **Editor**: plain `<textarea>` for now — a richer editor (CodeMirror 6 or Monaco) is planned but not yet integrated. See open issues for the bundling constraints.
 - **Dependency injection**: `MauiProgram.cs` using `MauiAppBuilder`
 
 ## Coding Guidelines
@@ -40,12 +40,11 @@ It targets **macOS (Mac Catalyst)** and **Windows** only — no Android, iOS, or
 - Use Tailwind utility classes directly in Razor components.
 - CSS isolation (`.razor.css`) can be used for component-specific overrides where Tailwind alone is insufficient.
 
-### Editor (Monaco Editor)
+### Editor
 
-- Use **Monaco Editor** (via JS interop) as the core text editing component inside each tab.
-- Monaco handles syntax highlighting natively for JSON and XML — do not add a separate highlighting library.
-- Interact with Monaco via `IJSRuntime` JS interop calls from Blazor components.
-- Monaco lives in `wwwroot/` — load it from there, do not use a CDN.
+- The current editor is a plain `<textarea>` styled with Tailwind to match the dark VS Code look. Keep it simple until a richer editor is chosen.
+- A future richer editor (e.g. CodeMirror 6 or Monaco) requires a real JS bundler (npm + esbuild/vite) because CodeMirror 6 enforces a single instance of `@codemirror/state` — combining separate ESM bundles from a CDN fails with "Unrecognized extension value" errors.
+- Any future editor must be bundled at dev time into ONE self-contained JS file committed to the repo. The app must work offline; do not load editor code from a CDN at runtime.
 
 ### Blazor Hybrid
 
