@@ -1,5 +1,86 @@
-﻿@page "/"
+@page "/"
 
-<h1>Hello, world!</h1>
+<div class="flex flex-col h-full min-h-0">
 
-Welcome to your new app.
+    <!-- Tab Bar -->
+    <div class="flex items-stretch h-9 bg-[#252526] border-b border-[#1e1e1e] shrink-0 overflow-x-auto select-none">
+        <div class="flex items-stretch h-full min-w-0">
+            @foreach (var tab in tabs)
+            {
+                var isActive = tab.Id == activeTabId;
+                <div @key="tab.Id"
+                     @onclick="() => Activate(tab.Id)"
+                     class="@($"group flex items-center h-full pl-4 pr-2 border-r border-r-black/40 text-[13px] gap-2 cursor-pointer min-w-[140px] max-w-[200px] {(isActive ? "bg-[#1e1e1e] border-t-2 border-t-[#0e639c] text-white" : "bg-[#2d2d2d] hover:bg-[#333333] text-[#cccccc]")}")">
+                    <span class="truncate flex-1">@tab.Title</span>
+                    <button @onclick="() => Close(tab.Id)"
+                            @onclick:stopPropagation="true"
+                            class="w-5 h-5 flex items-center justify-center rounded-sm text-[#858585] hover:text-white hover:bg-white/10 transition-colors text-xs shrink-0"
+                            aria-label="Close tab">✕</button>
+                </div>
+            }
+        </div>
+        <button @onclick="NewTab"
+                class="px-3 flex items-center text-[#858585] hover:text-white hover:bg-white/5 transition-colors text-base leading-none"
+                aria-label="New tab">+</button>
+    </div>
+
+    <!-- Editor Area -->
+    <div class="flex-1 min-h-0 bg-[#1e1e1e]">
+        @if (ActiveTab is { } active)
+        {
+            <Editor @key="active.Id"
+                    InitialContent="@active.Content"
+                    ContentChanged="@(c => active.Content = c)" />
+        }
+        else
+        {
+            <div class="h-full w-full flex items-center justify-center text-[#858585] text-sm">
+                No tabs open. Click <span class="mx-1 px-2 py-0.5 bg-[#3c3c3c] rounded">+</span> to create one.
+            </div>
+        }
+    </div>
+
+</div>
+
+@code {
+    private sealed class TabModel
+    {
+        public required int Id { get; init; }
+        public required string Title { get; set; }
+        public string Content { get; set; } = string.Empty;
+    }
+
+    private readonly List<TabModel> tabs = new();
+    private int activeTabId;
+    private int nextId = 1;
+
+    private TabModel? ActiveTab => tabs.FirstOrDefault(t => t.Id == activeTabId);
+
+    protected override void OnInitialized() => NewTab();
+
+    private void NewTab()
+    {
+        var id = nextId++;
+        tabs.Add(new TabModel { Id = id, Title = $"Untitled {id}" });
+        activeTabId = id;
+    }
+
+    private void Activate(int id) => activeTabId = id;
+
+    private void Close(int id)
+    {
+        var idx = tabs.FindIndex(t => t.Id == id);
+        if (idx < 0) return;
+
+        tabs.RemoveAt(idx);
+
+        if (activeTabId == id && tabs.Count > 0)
+        {
+            activeTabId = tabs[Math.Min(idx, tabs.Count - 1)].Id;
+        }
+        else if (tabs.Count == 0)
+        {
+            activeTabId = 0;
+        }
+    }
+}
