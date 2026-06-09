@@ -10,6 +10,8 @@ It targets **macOS (Mac Catalyst)** and **Windows** only — no Android, iOS, or
 - **SDK**: .NET 10 (net10.0-maccatalyst, net10.0-windows10.0.19041.0)
 - **Language**: C# 14 — always use the latest language features
 - **UI framework**: .NET MAUI Blazor Hybrid (`BlazorWebView` inside a MAUI shell)
+- **Styling**: Tailwind CSS — no Bootstrap, no Blazor component libraries
+- **Editor**: Monaco Editor (via JS interop in `wwwroot`) — handles text editing, syntax highlighting, and formatting
 - **Dependency injection**: `MauiProgram.cs` using `MauiAppBuilder`
 
 ## Coding Guidelines
@@ -30,6 +32,20 @@ It targets **macOS (Mac Catalyst)** and **Windows** only — no Android, iOS, or
 - XAML source generation is enabled (`MauiXamlInflator=SourceGen`) — do not disable it.
 - Platform-specific code goes in `Platforms/MacCatalyst/` or `Platforms/Windows/` using `#if` preprocessor or partial classes, not runtime checks.
 - Use `Microsoft.Maui.Controls` APIs; do not introduce Xamarin.Forms patterns.
+
+### Styling (Tailwind CSS)
+
+- Use **Tailwind CSS** for all styling — do not use Bootstrap or any Blazor component library (MudBlazor, Fluent UI, etc.).
+- The UI should look and feel like a **native desktop application** — not a website.
+- Use Tailwind utility classes directly in Razor components.
+- CSS isolation (`.razor.css`) can be used for component-specific overrides where Tailwind alone is insufficient.
+
+### Editor (Monaco Editor)
+
+- Use **Monaco Editor** (via JS interop) as the core text editing component inside each tab.
+- Monaco handles syntax highlighting natively for JSON and XML — do not add a separate highlighting library.
+- Interact with Monaco via `IJSRuntime` JS interop calls from Blazor components.
+- Monaco lives in `wwwroot/` — load it from there, do not use a CDN.
 
 ### Blazor Hybrid
 
